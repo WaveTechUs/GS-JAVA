@@ -2,19 +2,18 @@ package restaurante;
 
 import java.time.LocalTime;
 import alimentos.Alimentos;
-import endereco.Endereco;
 
 public class Restaurante {
 	private String nome;
-	private int cnpj;
+	private long cnpj;
 	private String senha;
 	private LocalTime horaRetirada;
 	private boolean statusRetirada;
 	private Alimentos alimentos;
-	private Endereco endereco;
-	
-	public Restaurante(String nome, int cnpj, String senha, LocalTime horaRetirada, boolean statusRetirada,
-			Alimentos alimentos, Endereco endereco) {
+	private String endereco;
+
+	public Restaurante(String nome, long cnpj, String senha, LocalTime horaRetirada, boolean statusRetirada,
+			Alimentos alimentos, String endereco) {
 		super();
 		this.nome = nome;
 		this.cnpj = cnpj;
@@ -25,6 +24,18 @@ public class Restaurante {
 		this.endereco = endereco;
 	}
 
+	public String getDados() {
+		String aux = "";
+		aux += "Nome: " + nome + "\n";
+		aux += "CNPJ: " + cnpj + "\n";
+		aux += "Senha: " + senha + "\n";
+		aux += "Hora da Retirada: " + horaRetirada + "\n";
+		aux += "Status da retirada: " + statusRetirada + "\n";
+		aux += "Endereço: " + endereco + "\n";
+//		alimentos.getDados;
+		return aux;
+	}
+
 	public String getNome() {
 		return nome;
 	}
@@ -33,11 +44,11 @@ public class Restaurante {
 		this.nome = nome;
 	}
 
-	public int getCnpj() {
+	public long getCnpj() {
 		return cnpj;
 	}
 
-	public void setCnpj(int cnpj) {
+	public void setCnpj(long cnpj) {
 		this.cnpj = cnpj;
 	}
 
@@ -73,12 +84,12 @@ public class Restaurante {
 		this.alimentos = alimentos;
 	}
 
-	public Endereco getEndereco() {
+	public String getEndereco() {
 		return endereco;
 	}
 
-	public void setEndereco(Endereco endereco) {
+	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
-	
+
 }

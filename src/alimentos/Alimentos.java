@@ -1,23 +1,13 @@
 package alimentos;
 
 public class Alimentos {
-	private int id;
 	private String descricao;
 	private double peso;
-	
-	public Alimentos(int id, String descricao, double peso) {
+
+	public Alimentos(String descricao, double peso) {
 		super();
-		this.id = id;
 		this.descricao = descricao;
 		this.peso = peso;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getDescricao() {

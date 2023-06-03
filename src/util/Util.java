@@ -4,8 +4,12 @@ import static java.lang.Integer.parseInt;
 import static javax.swing.JOptionPane.showInputDialog;
 import static javax.swing.JOptionPane.showMessageDialog;
 
+import java.time.LocalTime;
+
+import alimentos.Alimentos;
 import armazenamento.Armazenamento;
-import armazenamento.Armazenamento.Retorno;
+import armazenamento.Armazenamento.RetornoOng;
+import armazenamento.Armazenamento.RetornoRestaurante;
 import ong.Ong;
 import restaurante.Restaurante;
 
@@ -51,13 +55,13 @@ public class Util {
 					cadastrarRestaurante();
 					break;
 				case 6:
-//					cancelar();
+					pesquisarRestaurante();
 					break;
 				case 7:
-//					cancelar();
+					alterarRestaurante();
 					break;
 				case 8:
-//					cancelar();
+					apagarRestaurante();
 					break;
 				}
 			}
@@ -87,7 +91,7 @@ public class Util {
 	private void pesquisarONG() {
 		long cnpj = parseInt(showInputDialog("CNPJ"));
 
-		Retorno retorno = armazenamento.pesquisarOng(cnpj);
+		RetornoOng retorno = armazenamento.pesquisarOng(cnpj);
 
 		if (retorno.ok) {
 			Ong ong = retorno.dado;
@@ -96,54 +100,101 @@ public class Util {
 			showMessageDialog(null, "Ong não encontrada");
 		}
 	}
-	
+
 	private void alterarONG() {
 		long cnpj = parseInt(showInputDialog("CNPJ a ser alterado (Sem pontuação)"));
 		long cnpjNovo = parseInt(showInputDialog("CNPJ novo (Sem pontuação)"));
 		String nomeNovo = showInputDialog("Nome novo");
 		String senhaNova = showInputDialog("Senha novo");
-		
-		Retorno retorno = armazenamento.alterarOng(cnpj, cnpjNovo, nomeNovo, senhaNova);
-		if(retorno.ok) {
+
+		RetornoOng retorno = armazenamento.alterarOng(cnpj, cnpjNovo, nomeNovo, senhaNova);
+		if (retorno.ok) {
 			showMessageDialog(null, "Ong alterada");
-		}else {
+		} else {
 			showMessageDialog(null, "Ong não encontrada");
 		}
 	}
 
 	private void apagarONG() {
 		long cnpj = parseInt(showInputDialog("CNPJ (Sem pontuação)"));
-		
-		Retorno retorno = armazenamento.apagarOng(cnpj);
-		
-		if(retorno.ok) {
+
+		RetornoOng retorno = armazenamento.apagarOng(cnpj);
+
+		if (retorno.ok) {
 			showMessageDialog(null, "Ong foi apagada");
-		}else {
+		} else {
 			showMessageDialog(null, "Ong não foi encontrada");
 		}
 	}
-	
+
 	private void cadastrarRestaurante() {
 		try {
+			String nome = showInputDialog("Nome");
 			long cnpj = parseInt(showInputDialog("CNPJ (Sem pontuação)"));
-			String nomeCliente = showInputDialog("Nome do cliente");
 			String senha = showInputDialog("Senha");
+			String endereco = showInputDialog("Endereco");
+			String descricao = showInputDialog("Descrição dos alimentos");
+			double peso = Double.parseDouble(showInputDialog("Peso(kg) dos alimentos"));
+			// ver como usar localtime e se faz sentido usar boolean
 
-			
-//			Restaurante restaurante = new Restaurante(nomeCliente, 0, senha, null, false, null, null)
+			Alimentos alimentos = new Alimentos(descricao, peso);
+			Restaurante restaurante = new Restaurante(nome, cnpj, senha, LocalTime.now(), true, alimentos, endereco);
 
-//			if (armazenamento.adicionarOng(ong)) {
-//				showMessageDialog(null, "Ong registrada com sucesso");
-//			} else {
-//				showMessageDialog(null, "Ong já registrada");
-//			}
+			if (armazenamento.adicionarRestaurante(restaurante)) {
+				showMessageDialog(null, "Restaurante registrado com sucesso");
+			} else {
+				showMessageDialog(null, "Restaurante já registrado");
+			}
 
 		} catch (NumberFormatException e) {
 			showMessageDialog(null, "Opção inválida");
 			return;
 		}
 	}
-	
+
+	private void pesquisarRestaurante() {
+		long cnpj = parseInt(showInputDialog("CNPJ"));
+
+		RetornoRestaurante retorno = armazenamento.pesquisarRestaurante(cnpj);
+
+		if (retorno.ok) {
+			Restaurante restaurante = retorno.dado;
+			showMessageDialog(null, restaurante.getDados());
+		} else {
+			showMessageDialog(null, "Restaurante não encontrado");
+		}
+	}
+
+	private void alterarRestaurante() {
+		long cnpj = parseInt(showInputDialog("CNPJ a ser alterado (Sem pontuação)"));
+		String nomeNovo = showInputDialog("Nome");
+		long cnpjNovo = parseInt(showInputDialog("CNPJ (Sem pontuação)"));
+		String senhaNova = showInputDialog("Senha");
+		String enderecoNovo = showInputDialog("Endereco");
+		String descricaoNovo = showInputDialog("Descrição dos alimentos");
+		double pesoNovo = Double.parseDouble(showInputDialog("Peso(kg) dos alimentos"));
+
+		RetornoRestaurante retorno = armazenamento.alterarRestaurante(cnpj, cnpjNovo, nomeNovo, senhaNova, enderecoNovo,
+				descricaoNovo, pesoNovo);
+		if (retorno.ok) {
+			showMessageDialog(null, "Restaurante alterado11");
+		} else {
+			showMessageDialog(null, "Restaurante não encontrado");
+		}
+	}
+
+	private void apagarRestaurante() {
+		long cnpj = parseInt(showInputDialog("CNPJ (Sem pontuação)"));
+
+		RetornoRestaurante retorno = armazenamento.apagarRestaurante(cnpj);
+
+		if (retorno.ok) {
+			showMessageDialog(null, "Restaurante foi apagado");
+		} else {
+			showMessageDialog(null, "Restaurante não foi encontrado");
+		}
+	}
+
 	private String gerarMenu() {
 		String aux = "Reserva de Cargas\n";
 		aux += "1. Cadastrar Ong\n";
