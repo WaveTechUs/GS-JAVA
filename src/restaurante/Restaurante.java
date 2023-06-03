@@ -5,19 +5,17 @@ import alimentos.Alimentos;
 import endereco.Endereco;
 
 public class Restaurante {
-	private int id;
 	private String nome;
-	private String cnpj;
+	private int cnpj;
 	private String senha;
 	private LocalTime horaRetirada;
 	private boolean statusRetirada;
 	private Alimentos alimentos;
 	private Endereco endereco;
 	
-	public Restaurante(int id, String nome, String cnpj, String senha, LocalTime horaRetirada, boolean statusRetirada,
+	public Restaurante(String nome, int cnpj, String senha, LocalTime horaRetirada, boolean statusRetirada,
 			Alimentos alimentos, Endereco endereco) {
 		super();
-		this.id = id;
 		this.nome = nome;
 		this.cnpj = cnpj;
 		this.senha = senha;
@@ -25,14 +23,6 @@ public class Restaurante {
 		this.statusRetirada = statusRetirada;
 		this.alimentos = alimentos;
 		this.endereco = endereco;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getNome() {
@@ -43,11 +33,11 @@ public class Restaurante {
 		this.nome = nome;
 	}
 
-	public String getCnpj() {
+	public int getCnpj() {
 		return cnpj;
 	}
 
-	public void setCnpj(String cnpj) {
+	public void setCnpj(int cnpj) {
 		this.cnpj = cnpj;
 	}
 
