@@ -34,9 +34,6 @@ public class Restaurante {
 		return aux;
 	}
 
-	public String getNome() {
-		return nome;
-	}
 
 	public void setNome(String nome) {
 		this.nome = nome;
@@ -48,10 +45,6 @@ public class Restaurante {
 
 	public void setCnpj(long cnpj) {
 		this.cnpj = cnpj;
-	}
-
-	public String getSenha() {
-		return senha;
 	}
 
 	public void setSenha(String senha) {
@@ -66,18 +59,10 @@ public class Restaurante {
 		this.statusRetirada = statusRetirada;
 	}
 
-	public Alimentos getAlimentos() {
-		return alimentos;
-	}
-
 	public void setAlimentos(Alimentos alimentos) {
 		this.alimentos = alimentos;
 	}
-
-	public String getEndereco() {
-		return endereco;
-	}
-
+	
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}

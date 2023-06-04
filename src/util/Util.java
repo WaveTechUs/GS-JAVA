@@ -38,16 +38,16 @@ public class Util {
 			} else {
 				switch (opcao) {
 				case 1:
-					cadastrarONG();
+					cadastrarOng();
 					break;
 				case 2:
-					pesquisarONG();
+					pesquisarOng();
 					break;
 				case 3:
-					alterarONG();
+					alterarOng();
 					break;
 				case 4:
-					apagarONG();
+					apagarOng();
 					break;
 				case 5:
 					cadastrarRestaurante();
@@ -66,7 +66,7 @@ public class Util {
 		} while (opcao != 9);
 	}
 
-	private void cadastrarONG() {
+	private void cadastrarOng() {
 		try {
 			long cnpj = parseInt(showInputDialog("CNPJ (Sem pontuação)"));
 			String nomeCliente = showInputDialog("Nome do cliente");
@@ -87,7 +87,7 @@ public class Util {
 		}
 	}
 
-	private void pesquisarONG() {
+	private void pesquisarOng() {
 		long cnpj = parseInt(showInputDialog("CNPJ"));
 
 		RetornoOng retorno = armazenamento.pesquisarOng(cnpj);
@@ -100,7 +100,7 @@ public class Util {
 		}
 	}
 
-	private void alterarONG() {
+	private void alterarOng() {
 		long cnpj = parseInt(showInputDialog("CNPJ a ser alterado (Sem pontuação)"));
 		long cnpjNovo = parseInt(showInputDialog("CNPJ novo (Sem pontuação)"));
 		String nomeNovo = showInputDialog("Nome novo");
@@ -116,7 +116,7 @@ public class Util {
 		}
 	}
 
-	private void apagarONG() {
+	private void apagarOng() {
 		long cnpj = parseInt(showInputDialog("CNPJ (Sem pontuação)"));
 
 		RetornoOng retorno = armazenamento.apagarOng(cnpj);

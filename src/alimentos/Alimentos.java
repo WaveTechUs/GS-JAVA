@@ -16,20 +16,4 @@ public class Alimentos {
 		aux += "Peso(Kg) dos alimentos: " + this.peso + "\n";
 		return aux;
 	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public double getPeso() {
-		return peso;
-	}
-
-	public void setPeso(double peso) {
-		this.peso = peso;
-	}
 }

@@ -14,10 +14,6 @@ public class RetornoOng extends Retorno {
 		this.dado = dado;
 	}
 	
-	public boolean getOk() {
-		return this.isOk();
-	}
-
 	public Ong getDado() {
 		return dado;
 	}
