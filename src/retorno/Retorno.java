@@ -1,6 +1,6 @@
 package retorno;
 
-public class Retorno {
+public abstract class Retorno {
 	private boolean ok;
 	
 	public Retorno() {
