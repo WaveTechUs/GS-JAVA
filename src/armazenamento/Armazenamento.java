@@ -122,7 +122,7 @@ public class Armazenamento {
 	}
 
 	public RetornoRestaurante alterarRestaurante(long cnpj, long cnpjNovo, String nomeNovo, String senhaNova,
-			String enderecoNovo, String descricaoNovo, double pesoNovo) {
+			String enderecoNovo, String descricaoNovo, double pesoNovo, boolean statusRetiradaBoolNova) {
 
 		RetornoRestaurante saida = new RetornoRestaurante();
 		RetornoRestaurante itemPesquisado = pesquisarRestaurante(cnpj);
@@ -134,6 +134,7 @@ public class Armazenamento {
 			restaurante.setNome(nomeNovo);
 			restaurante.setSenha(senhaNova);
 			restaurante.setEndereco(enderecoNovo);
+			restaurante.setStatusRetirada(statusRetiradaBoolNova);
 			restaurante.setAlimentos(alimentosNovo);
 
 			saida.ok = true;

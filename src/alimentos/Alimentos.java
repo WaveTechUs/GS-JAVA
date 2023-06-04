@@ -10,6 +10,13 @@ public class Alimentos {
 		this.peso = peso;
 	}
 
+	public String getDados() {
+		String aux = "";
+		aux += "Descricão dos alimentos: " + this.descricao + "\n";
+		aux += "Peso(Kg) dos alimentos: " + this.peso + "\n";
+		return aux;
+	}
+
 	public String getDescricao() {
 		return descricao;
 	}

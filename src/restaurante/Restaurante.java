@@ -7,18 +7,16 @@ public class Restaurante {
 	private String nome;
 	private long cnpj;
 	private String senha;
-	private LocalTime horaRetirada;
 	private boolean statusRetirada;
 	private Alimentos alimentos;
 	private String endereco;
 
-	public Restaurante(String nome, long cnpj, String senha, LocalTime horaRetirada, boolean statusRetirada,
-			Alimentos alimentos, String endereco) {
+	public Restaurante(String nome, long cnpj, String senha, boolean statusRetirada, Alimentos alimentos,
+			String endereco) {
 		super();
 		this.nome = nome;
 		this.cnpj = cnpj;
 		this.senha = senha;
-		this.horaRetirada = horaRetirada;
 		this.statusRetirada = statusRetirada;
 		this.alimentos = alimentos;
 		this.endereco = endereco;
@@ -26,13 +24,14 @@ public class Restaurante {
 
 	public String getDados() {
 		String aux = "";
+		String bool = statusRetirada == true ? "Disponível" : "Não disponível";
+
 		aux += "Nome: " + nome + "\n";
 		aux += "CNPJ: " + cnpj + "\n";
 		aux += "Senha: " + senha + "\n";
-		aux += "Hora da Retirada: " + horaRetirada + "\n";
-		aux += "Status da retirada: " + statusRetirada + "\n";
+		aux += "Status da retirada: " + bool + "\n";
 		aux += "Endereço: " + endereco + "\n";
-//		alimentos.getDados;
+		aux += alimentos.getDados();
 		return aux;
 	}
 
@@ -58,14 +57,6 @@ public class Restaurante {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
-	}
-
-	public LocalTime getHoraRetirada() {
-		return horaRetirada;
-	}
-
-	public void setHoraRetirada(LocalTime horaRetirada) {
-		this.horaRetirada = horaRetirada;
 	}
 
 	public boolean isStatusRetirada() {

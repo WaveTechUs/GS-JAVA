@@ -72,8 +72,9 @@ public class Util {
 		try {
 			long cnpj = parseInt(showInputDialog("CNPJ (Sem pontuação)"));
 			String nomeCliente = showInputDialog("Nome do cliente");
+			stringVazia(nomeCliente);
 			String senha = showInputDialog("Senha");
-
+			stringVazia(senha);
 			Ong ong = new Ong(nomeCliente, cnpj, senha);
 
 			if (armazenamento.adicionarOng(ong)) {
@@ -105,7 +106,9 @@ public class Util {
 		long cnpj = parseInt(showInputDialog("CNPJ a ser alterado (Sem pontuação)"));
 		long cnpjNovo = parseInt(showInputDialog("CNPJ novo (Sem pontuação)"));
 		String nomeNovo = showInputDialog("Nome novo");
+		stringVazia(nomeNovo);
 		String senhaNova = showInputDialog("Senha novo");
+		stringVazia(senhaNova);
 
 		RetornoOng retorno = armazenamento.alterarOng(cnpj, cnpjNovo, nomeNovo, senhaNova);
 		if (retorno.ok) {
@@ -130,15 +133,28 @@ public class Util {
 	private void cadastrarRestaurante() {
 		try {
 			String nome = showInputDialog("Nome");
+			stringVazia(nome);
 			long cnpj = parseInt(showInputDialog("CNPJ (Sem pontuação)"));
 			String senha = showInputDialog("Senha");
+			stringVazia(senha);
 			String endereco = showInputDialog("Endereco");
+			stringVazia(endereco);
 			String descricao = showInputDialog("Descrição dos alimentos");
+			stringVazia(descricao);
 			double peso = Double.parseDouble(showInputDialog("Peso(kg) dos alimentos"));
-			// ver como usar localtime e se faz sentido usar boolean
+			int statusRetirada = parseInt(showInputDialog("Retirada disponível? (1) Sim  - (2) Não"));
+			boolean statusRetiradaBool;
+
+			if (statusRetirada == 1) {
+				statusRetiradaBool = true;
+			} else if (statusRetirada == 2) {
+				statusRetiradaBool = false;
+			} else {
+				throw new NumberFormatException("Opção inválida");
+			}
 
 			Alimentos alimentos = new Alimentos(descricao, peso);
-			Restaurante restaurante = new Restaurante(nome, cnpj, senha, LocalTime.now(), true, alimentos, endereco);
+			Restaurante restaurante = new Restaurante(nome, cnpj, senha, statusRetiradaBool, alimentos, endereco);
 
 			if (armazenamento.adicionarRestaurante(restaurante)) {
 				showMessageDialog(null, "Restaurante registrado com sucesso");
@@ -168,16 +184,30 @@ public class Util {
 	private void alterarRestaurante() {
 		long cnpj = parseInt(showInputDialog("CNPJ a ser alterado (Sem pontuação)"));
 		String nomeNovo = showInputDialog("Nome");
+		stringVazia(nomeNovo);
 		long cnpjNovo = parseInt(showInputDialog("CNPJ (Sem pontuação)"));
 		String senhaNova = showInputDialog("Senha");
+		stringVazia(senhaNova);
 		String enderecoNovo = showInputDialog("Endereco");
+		stringVazia(enderecoNovo);
 		String descricaoNovo = showInputDialog("Descrição dos alimentos");
+		stringVazia(descricaoNovo);
 		double pesoNovo = Double.parseDouble(showInputDialog("Peso(kg) dos alimentos"));
+		int statusRetirada = parseInt(showInputDialog("Retirada disponível? (1) Sim  - (2) Não"));
+		boolean statusRetiradaBoolNovo;
+
+		if (statusRetirada == 1) {
+			statusRetiradaBoolNovo = true;
+		} else if (statusRetirada == 2) {
+			statusRetiradaBoolNovo = false;
+		} else {
+			throw new NumberFormatException("Opção inválida");
+		}
 
 		RetornoRestaurante retorno = armazenamento.alterarRestaurante(cnpj, cnpjNovo, nomeNovo, senhaNova, enderecoNovo,
-				descricaoNovo, pesoNovo);
+				descricaoNovo, pesoNovo, statusRetiradaBoolNovo);
 		if (retorno.ok) {
-			showMessageDialog(null, "Restaurante alterado11");
+			showMessageDialog(null, "Restaurante alterado");
 		} else {
 			showMessageDialog(null, "Restaurante não encontrado");
 		}
@@ -193,6 +223,11 @@ public class Util {
 		} else {
 			showMessageDialog(null, "Restaurante não foi encontrado");
 		}
+	}
+
+	private void stringVazia(String input) {
+		if (input.length() == 0)
+			throw new NumberFormatException("Opção inválida");
 	}
 
 	private String gerarMenu() {
