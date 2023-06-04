@@ -4,14 +4,12 @@ import static java.lang.Integer.parseInt;
 import static javax.swing.JOptionPane.showInputDialog;
 import static javax.swing.JOptionPane.showMessageDialog;
 
-import java.time.LocalTime;
-
 import alimentos.Alimentos;
 import armazenamento.Armazenamento;
-import armazenamento.Armazenamento.RetornoOng;
-import armazenamento.Armazenamento.RetornoRestaurante;
 import ong.Ong;
 import restaurante.Restaurante;
+import retorno.RetornoOng;
+import retorno.RetornoRestaurante;
 
 public class Util {
 	Armazenamento armazenamento = new Armazenamento();
@@ -94,8 +92,8 @@ public class Util {
 
 		RetornoOng retorno = armazenamento.pesquisarOng(cnpj);
 
-		if (retorno.ok) {
-			Ong ong = retorno.dado;
+		if (retorno.isOk()) {
+			Ong ong = retorno.getDado();
 			showMessageDialog(null, ong.getDados());
 		} else {
 			showMessageDialog(null, "Ong não encontrada");
@@ -111,7 +109,7 @@ public class Util {
 		stringVazia(senhaNova);
 
 		RetornoOng retorno = armazenamento.alterarOng(cnpj, cnpjNovo, nomeNovo, senhaNova);
-		if (retorno.ok) {
+		if (retorno.isOk()) {
 			showMessageDialog(null, "Ong alterada");
 		} else {
 			showMessageDialog(null, "Ong não encontrada");
@@ -123,7 +121,7 @@ public class Util {
 
 		RetornoOng retorno = armazenamento.apagarOng(cnpj);
 
-		if (retorno.ok) {
+		if (retorno.isOk()) {
 			showMessageDialog(null, "Ong foi apagada");
 		} else {
 			showMessageDialog(null, "Ong não foi encontrada");
@@ -173,8 +171,8 @@ public class Util {
 
 		RetornoRestaurante retorno = armazenamento.pesquisarRestaurante(cnpj);
 
-		if (retorno.ok) {
-			Restaurante restaurante = retorno.dado;
+		if (retorno.isOk()) {
+			Restaurante restaurante = retorno.getDado();
 			showMessageDialog(null, restaurante.getDados());
 		} else {
 			showMessageDialog(null, "Restaurante não encontrado");
@@ -206,7 +204,7 @@ public class Util {
 
 		RetornoRestaurante retorno = armazenamento.alterarRestaurante(cnpj, cnpjNovo, nomeNovo, senhaNova, enderecoNovo,
 				descricaoNovo, pesoNovo, statusRetiradaBoolNovo);
-		if (retorno.ok) {
+		if (retorno.isOk()) {
 			showMessageDialog(null, "Restaurante alterado");
 		} else {
 			showMessageDialog(null, "Restaurante não encontrado");
@@ -218,7 +216,7 @@ public class Util {
 
 		RetornoRestaurante retorno = armazenamento.apagarRestaurante(cnpj);
 
-		if (retorno.ok) {
+		if (retorno.isOk()) {
 			showMessageDialog(null, "Restaurante foi apagado");
 		} else {
 			showMessageDialog(null, "Restaurante não foi encontrado");

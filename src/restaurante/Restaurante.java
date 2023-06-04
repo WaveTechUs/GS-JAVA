@@ -1,6 +1,5 @@
 package restaurante;
 
-import java.time.LocalTime;
 import alimentos.Alimentos;
 
 public class Restaurante {

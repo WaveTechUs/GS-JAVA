@@ -1,28 +1,20 @@
 package armazenamento;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 import alimentos.Alimentos;
 import ong.Ong;
 import restaurante.Restaurante;
+import retorno.RetornoOng;
+import retorno.RetornoRestaurante;
 
 public class Armazenamento {
-	private LinkedList<Ong> ongs = new LinkedList<>();
-	private LinkedList<Restaurante> restaurantes = new LinkedList<>();
-
-	public static class RetornoOng {
-		public boolean ok;
-		public Ong dado;
-	}
-
-	public static class RetornoRestaurante {
-		public boolean ok;
-		public Restaurante dado;
-	}
+	private ArrayList<Ong> ongs = new ArrayList<>();
+	private ArrayList<Restaurante> restaurantes = new ArrayList<>();
 
 	public boolean adicionarOng(Ong ong) {
 		RetornoOng itemPesquisado = pesquisarOng(ong.getCnpj());
-		if (itemPesquisado.ok) {
+		if (itemPesquisado.isOk()) {
 			return false;
 		}
 
@@ -39,8 +31,8 @@ public class Armazenamento {
 		for (Ong item : ongs) {
 
 			if (item.getCnpj() == cnpj) {
-				saida.ok = true;
-				saida.dado = item;
+				saida.setOk(true);
+				saida.setDado(item);
 			}
 
 		}
@@ -51,16 +43,16 @@ public class Armazenamento {
 		RetornoOng saida = new RetornoOng();
 		RetornoOng itemPesquisado = pesquisarOng(cnpj);
 
-		if (itemPesquisado.ok) {
-			Ong ong = itemPesquisado.dado;
+		if (itemPesquisado.isOk()) {
+			Ong ong = itemPesquisado.getDado();
 			ong.setCnpj(cnpjNovo);
 			ong.setNome(nomeNovo);
 			ong.setSenha(senhaNova);
 
-			saida.ok = true;
-			saida.dado = ong;
+			saida.setOk(true);
+			saida.setDado(ong);
 		} else {
-			saida.ok = false;
+			saida.setOk(false);
 		}
 
 		return saida;
@@ -70,11 +62,11 @@ public class Armazenamento {
 		RetornoOng saida = new RetornoOng();
 		RetornoOng itemPesquisado = pesquisarOng(cnpj);
 
-		if (itemPesquisado.ok) {
-			ongs.remove(itemPesquisado.dado);
-			saida.ok = true;
+		if (itemPesquisado.isOk()) {
+			ongs.remove(itemPesquisado.getDado());
+			saida.setOk(true);
 		} else {
-			saida.ok = false;
+			saida.setOk(false);
 		}
 
 		return saida;
@@ -85,8 +77,8 @@ public class Armazenamento {
 		for (Restaurante item : restaurantes) {
 
 			if (item.getCnpj() == cnpj) {
-				saida.ok = true;
-				saida.dado = item;
+				saida.setOk(true);
+				saida.setDado(item);
 			}
 
 		}
@@ -95,7 +87,7 @@ public class Armazenamento {
 
 	public boolean adicionarRestaurante(Restaurante restaurante) {
 		RetornoRestaurante itemPesquisado = pesquisarRestaurante(restaurante.getCnpj());
-		if (itemPesquisado.ok) {
+		if (itemPesquisado.isOk()) {
 			return false;
 		}
 
@@ -111,11 +103,11 @@ public class Armazenamento {
 		RetornoRestaurante saida = new RetornoRestaurante();
 		RetornoRestaurante itemPesquisado = pesquisarRestaurante(cnpj);
 
-		if (itemPesquisado.ok) {
-			restaurantes.remove(itemPesquisado.dado);
-			saida.ok = true;
+		if (itemPesquisado.isOk()) {
+			restaurantes.remove(itemPesquisado.getDado());
+			saida.setOk(true);
 		} else {
-			saida.ok = false;
+			saida.setOk(false);
 		}
 
 		return saida;
@@ -127,8 +119,8 @@ public class Armazenamento {
 		RetornoRestaurante saida = new RetornoRestaurante();
 		RetornoRestaurante itemPesquisado = pesquisarRestaurante(cnpj);
 
-		if (itemPesquisado.ok) {
-			Restaurante restaurante = itemPesquisado.dado;
+		if (itemPesquisado.isOk()) {
+			Restaurante restaurante = itemPesquisado.getDado();
 			Alimentos alimentosNovo = new Alimentos(descricaoNovo, pesoNovo);
 			restaurante.setCnpj(cnpjNovo);
 			restaurante.setNome(nomeNovo);
@@ -137,10 +129,10 @@ public class Armazenamento {
 			restaurante.setStatusRetirada(statusRetiradaBoolNova);
 			restaurante.setAlimentos(alimentosNovo);
 
-			saida.ok = true;
-			saida.dado = restaurante;
+			saida.setOk(true);
+			saida.setDado(restaurante);
 		} else {
-			saida.ok = false;
+			saida.setOk(false);
 		}
 
 		return saida;
